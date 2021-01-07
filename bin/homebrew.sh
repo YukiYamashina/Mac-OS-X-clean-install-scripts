@@ -6,8 +6,8 @@ source ${script_dir}/helpers.sh
 
 ### install homebrew if not installed
 if ! type -P brew > /dev/null ; then
-    green "installing homebrew ..."
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  green "installing homebrew ..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 green "finished installing homebrew"
@@ -27,12 +27,12 @@ brew upgrade
 green "finished updating homebrew ..."
 
 ### add repositories
-repositories="homebrew/cask homebrew/services wix/brew"
+repositories="homebrew/cask homebrew/services wix/brew heroku/brew"
 for repository in ${repositories} ; do
-    if [ "`brew tap | grep ${repository}`" != "${repository}" ] ; then
-        green "brew tapping ${repository} ..."
-        brew tap ${repository}
-    fi
+  if [ "`brew tap | grep ${repository}`" != "${repository}" ] ; then
+    green "brew tapping ${repository} ..."
+    brew tap ${repository}
+  fi
 done
 green ""
 green "finished brew tap ..."
@@ -45,40 +45,70 @@ package_list="applesimutils
               coreutils
               docker
               gettext
+              gh
               ghostscript
               gnu-sed
+              graphviz
+              heroku
               httpd
               mysql
               node
               php
+              php@7.4
               phpmyadmin
               php-cs-fixer
               pkg-config
               sass/sass/sass
+              svn
               tree
               unrar
               watchman
               wget
+              wireshark
               wp-cli
               wp-cli-completion
               yarn
-              yarn-completion"
+              yarn-completion
+              zsh-completions
+              zsh-autosuggestions
+              zsh-syntax-highlighting"
 
 for package in ${package_list} ; do
-    if [ "`brew list | grep ${package}`" != "${package}" ] ; then
-        green "installing ${package} ..."
-        brew install ${package}
-    fi
+  if [ "`brew list --formula | grep ^${package}$`" != "${package}" ] ; then
+    green "installing ${package} ..."
+    brew install ${package}
+  fi
 done
 
 ### install packages on cask
-package_list="chromedriver"
+package_list="appcleaner
+              chatwork
+              chromedriver
+              db-browser-for-sqlite
+              docker
+              dropbox
+              firefox
+              flux
+              fontforge
+              imageoptim
+              iterm2
+              mpv
+              sequel-pro
+              simple-comic
+              sketch
+              skim
+              skype
+              tinypng4mac
+              tor-browser
+              typora
+              visual-studio-code
+              zoom"
 
 for package in ${package_list} ; do
-    if [ "`brew cask list | grep ${package}`" != "${package}" ] ; then
-        green "installing ${package} ..."
-        brew cask install ${package}
-    fi
+  if [ "`brew list --cask | grep ^${package}$`" != "${package}" ] ; then
+    green "installing ${package} ..."
+    brew install --cask ${package}
+  fi
 done
 
 green "finishing installing packages ..."
@@ -93,6 +123,4 @@ brew services restart httpd
 brew services restart php
 brew services restart mysql
 
-echo 'export PATH="$HOME/.rbenv/bin:/usr/local/bin:$PATH"' >> ~/.bash_profile
-echo 'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.bash_profile
-source ~/.bash_profile
+brew unlink yarn && brew link yarn
