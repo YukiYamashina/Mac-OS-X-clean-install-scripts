@@ -124,3 +124,5 @@ brew services restart php
 brew services restart mysql
 
 brew unlink yarn && brew link yarn
+
+wp package install wp-cli/dist-archive-command
