@@ -90,6 +90,7 @@ package_list="appcleaner
               firefox
               flux
               fontforge
+              futubull
               imageoptim
               iterm2
               mpv
