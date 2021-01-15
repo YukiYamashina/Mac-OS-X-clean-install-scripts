@@ -10,6 +10,7 @@ echo ""
 package_list="@vue/cli
               apidoc
               autoprefixer
+              conventional-changelog-cli
               create-react-app
               dart-sass
               detox-cli
