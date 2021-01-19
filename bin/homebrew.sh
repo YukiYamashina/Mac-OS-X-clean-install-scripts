@@ -52,6 +52,7 @@ package_list="applesimutils
               heroku
               httpd
               mysql
+              nkf
               node
               php
               php@7.4
