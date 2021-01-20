@@ -95,6 +95,7 @@ package_list="appcleaner
               imageoptim
               iterm2
               mpv
+              qlmarkdown
               sequel-pro
               simple-comic
               sketch
@@ -128,3 +129,8 @@ brew services restart mysql
 brew unlink yarn && brew link yarn
 
 wp package install wp-cli/dist-archive-command
+
+#
+# Restart Finder to enable qlmarkdown
+#
+killall Finder
