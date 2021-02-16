@@ -39,7 +39,8 @@ green "finished brew tap ..."
 green ""
 
 ### install packages
-package_list="applesimutils
+package_list="act
+              applesimutils
               colordiff
               composer
               coreutils
